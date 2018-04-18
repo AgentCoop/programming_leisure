@@ -32,6 +32,29 @@ if [[ $COMMAND == "debug" ]]; then
     $PROBLEM_OUTPUT
 elif [[ $COMMAND == "submit" ]]; then
     m4 "$PROBLEM_ROOT_DIR/main.c" | xclip -i -selection clipboard
+elif [[ $COMMAND == "new" ]]; then
+    mkdir -p "$PROBLEM_ROOT_DIR"/test
+    touch "$PROBLEM_ROOT_DIR"/test/input.txt
+    touch "$PROBLEM_ROOT_DIR"/test/output.txt
+    touch "$PROBLEM_ROOT_DIR"/README.md
+    tee "$PROBLEM_ROOT_DIR"/main.c <<MAIN.C > /dev/null
+#include <stdio.h>
+
+include(./incs/common.c)
+
+int
+main(void) {
+#if DEBUG
+    init_debug();
+#endif
+
+
+#if DEBUG
+    print_expected();
+#endif
+    return 0;
+}
+MAIN.C
 else
     echo Unknown command
     exit -1

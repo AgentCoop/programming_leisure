@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 PROBLEM_OUTPUT=/tmp/problem
 
 COMMAND=$1
@@ -25,7 +27,7 @@ done
 
 if [[ $COMMAND == "debug" ]]; then
     m4 "$PROBLEM_ROOT_DIR/main.c" |
-        gcc -DDEBUG_INPUT="\"$PROBLEM_ROOT_DIR/test/input.txt\"" -DDEBUG -Wall -xc -o "$PROBLEM_OUTPUT"  -
+        gcc -DPROBLEM_ROOT_DIR="\"$PROBLEM_ROOT_DIR\"" -DDEBUG -Wall -lm -xc -o "$PROBLEM_OUTPUT"  -
     
     $PROBLEM_OUTPUT
 elif [[ $COMMAND == "submit" ]]; then

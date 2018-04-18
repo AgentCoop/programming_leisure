@@ -1,11 +1,14 @@
 #ifdef DEBUG
-    #undef stdin
-    #define stdin input
-    FILE *input;
-#endif
+FILE *__input;
 
 void
 init_debug()
 {
-    input = fopen(DEBUG_INPUT, "r");    
+    __input = fopen(DEBUG_INPUT, "r");    
 }
+#endif
+    
+#ifdef DEBUG
+    #undef stdin
+    #define stdin __input
+#endif

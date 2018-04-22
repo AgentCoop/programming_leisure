@@ -2,7 +2,7 @@
 
 set -e
 
-PROBLEM_OUTPUT=/tmp/problem
+PROBLEM_EXEC=/tmp/problem
 
 COMMAND=$1
 shift
@@ -26,10 +26,9 @@ while [ $# -ge 1 ]; do
 done
 
 if [[ $COMMAND == "debug" ]]; then
-    m4 "$PROBLEM_ROOT_DIR/main.c" |
-        gcc -DPROBLEM_ROOT_DIR="\"$PROBLEM_ROOT_DIR\"" -DDEBUG -Wall -lm -xc -o "$PROBLEM_OUTPUT"  -
-    
-    $PROBLEM_OUTPUT
+    m4 "$PROBLEM_ROOT_DIR/main.c" > /tmp/output.c
+    gcc -DPROBLEM_ROOT_DIR="\"$PROBLEM_ROOT_DIR\"" -DDEBUG -Wall -O0 -g -lm /tmp/output.c -o "$PROBLEM_EXEC"    
+    bash -c "$PROBLEM_EXEC"
 elif [[ $COMMAND == "submit" ]]; then
     m4 "$PROBLEM_ROOT_DIR/main.c" | xclip -i -selection clipboard
 elif [[ $COMMAND == "new" ]]; then

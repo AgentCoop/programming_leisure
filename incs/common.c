@@ -36,9 +36,9 @@ print_expected() {
 
     strcpy(output_filename, PROBLEM_ROOT_DIR);
     strcat(output_filename, basename);
-
+   
     FILE *fd = fopen(output_filename, "r");
-
+   
     printf("%c[1;32mExpected:%c[0;m\n", 27, 27);
 
     while ((read = getline(&line, &len, fd)) != -1) {

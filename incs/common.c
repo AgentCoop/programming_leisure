@@ -4,6 +4,8 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+#define MAX_2_31_VALUE 2147483647
+
 #ifdef DEBUG
 FILE *__input;
 

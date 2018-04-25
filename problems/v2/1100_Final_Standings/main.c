@@ -41,7 +41,8 @@ main(void) {
         teams[i].solved_problems_num = solved_num;
     }
 
-    // Sort in descending order
+    // Sort in descending order. A stable sorting is required that's why we should use
+    // merge sort instead of the standard qsort function.
     merge_sort(teams, sizeof (team), &cmp_func, 0 , teams_num - 1);
 
     // Output team standings

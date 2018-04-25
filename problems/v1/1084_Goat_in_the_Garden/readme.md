@@ -1,3 +1,7 @@
+# 1084. Goat in the Garden
+ * Time limit: 1.0 second
+ * Memory limit: 64 MB
+
 Someone has let a goat in a square kitchen-garden and had bound it to a stake.
 The stake is driven into the ground in the very midst of the square.
 The goat is hungry as a hunter and very voracious, and eats everything that can

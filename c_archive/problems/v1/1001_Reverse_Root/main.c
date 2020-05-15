@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 include(./incs/common.c)
 
-#define MAX_INPUT_SIZE 256 * 1000
+#define MAX_INPUT_SIZE 256 * 1024
 
 int
 main(void) {
@@ -11,10 +12,10 @@ main(void) {
     init_debug();
 #endif
     
-    double input_integers[MAX_INPUT_SIZE / sizeof(double)];
+    double *input_integers = (double *) malloc(MAX_INPUT_SIZE);
     int integers_count = 0;
     
-    while (fscanf(stdin, "%lf", &input_integers[integers_count]) != EOF)
+    while (fscanf(stdin, "%lf", &input_integers[integers_count]) == 1)
         integers_count++;
     
     while (integers_count > 0) {
@@ -25,5 +26,8 @@ main(void) {
 #if DEBUG
     print_expected();
 #endif
+    
+    free(input_integers);
+    
     return 0;
 }

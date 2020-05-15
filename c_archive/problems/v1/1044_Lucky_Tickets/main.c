@@ -43,7 +43,7 @@ main(void) {
 #if DEBUG
     init_debug();
 #endif
-    int num_digits  ;
+    int num_digits;
     
     fscanf(stdin, "%d\n", &num_digits);
  

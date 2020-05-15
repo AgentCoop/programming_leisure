@@ -1,10 +1,15 @@
 #include <string.h>
+#include <limits.h>
+#include <math.h>
+#include <float.h>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
 
 #define MAX_2_31_VALUE 2147483647
+
+typedef unsigned int uint_16;
 
 #ifdef DEBUG
 FILE *__input;

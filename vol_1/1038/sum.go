@@ -6,6 +6,7 @@ import (
 
 func sol(N int) {
 	var sum float64
+	// Get absolute value for calculating the arithmetic series of the range [1..N]
 	absN := math.Abs(float64(N))
 	sum = 0
 	if N == 0 || N == 1 {

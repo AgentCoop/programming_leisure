@@ -4,7 +4,7 @@ import "math"
 
 var a [262144]int64
 
-func main() {
+func sol() {
 	n := 0
 	for {
 		var x int64
@@ -19,4 +19,8 @@ func main() {
 		n--
 		fmt.Printf("%.4f\n", math.Sqrt(float64(a[n])))
 	}
+}
+
+func main() {
+	sol()
 }

@@ -1,60 +1,46 @@
+/**
+* The given problem is similiar to the rod-cutting problem https://www.geeksforgeeks.org/cutting-a-rod-dp-13/
+* Optimal substructure: a[i] = min(a[i - side * side] + 1), where side from 1 upto <= sqrt(N)
+*/
 package main
 
 import (
 	"fmt"
+	"math"
 )
 
-const N = 60000
-const MAX_SIDE = 244
-// The goal is to minimize the number of terms in Sum(pi ^ 2)
-// Initialize first three elements of 1-indexed array.
-// For 1 quadrics you can buy 1 square meter, for 2 - 2 with two certificates
-var answers [N]uint32 = [N]uint32{0,1,2,3}
-
-func findClosestBestAnswer(amount uint32) uint32 {
+func dp(areas []uint32, quadricsAmount uint32) uint32 {
 	var i uint32
-	for i = amount; i > 0; i-- {
-		if answers[i] == 1 {
-			return i
-		}
-	}
-	return 0
-}
+	tab := make([]uint32, quadricsAmount + 1)
 
-func V(amount uint32) uint32 {
-	//if amount == 1 { return 1 }
-	//if amount == 2 { return 2 }
-	//if amount == 3 { return 3 }
-
-	var nCertifs uint32 = answers[amount]
-	if nCertifs > 0 { // Best answer
-		return nCertifs
-	} else {
-		var i uint32
-		for i = 3; i < amount; i++ {
-			a := V(i)
-			b := V(amount - i)
-			if answers[amount] > a + b || answers[amount] == 0 {
-				answers[amount] = a + b
+	for i = 1; i <= quadricsAmount; i++ {
+		var min uint32 = math.MaxUint32;
+		for j := 0; j < len(areas); j++ {
+			area := areas[j];
+			if area <= i {
+				if tab[i - area] + 1 < min {
+					min = tab[i - area] + 1
+				}
 			}
 		}
+		tab[i] = min
 	}
 
-	return answers[amount]
+	return tab[quadricsAmount];
 }
 
 func sol(quadricsN uint32) {
-	for i := 2; i <= MAX_SIDE; i++ {
-		answers[i * i] = 1
-		answers[i * i + 1] = 1
+	var m uint32 = uint32(math.Floor(math.Sqrt(float64(quadricsN))))
+	var i uint32
+	areas := make([]uint32, m)
+	for i = 1; i <= m; i++ {
+		areas[i - 1] = i * i
 	}
-	V(quadricsN)
-	fmt.Printf("%d\n", answers[quadricsN])
+	fmt.Printf("%d\n", dp(areas, quadricsN))
 }
 
 func main() {
-	//var quadricsN uint32
-	//fmt.Scanf("%d", &quadricsN)
-	//sol(quadricsN)
-	sol(59999)
+	var quadricsN uint32
+	fmt.Scanf("%d", &quadricsN)
+	sol(quadricsN)
 }

@@ -4,21 +4,22 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 )
 
 func calcTotalAmount() {
 	var N int
+	var line string
 	for {
 		_, err := fmt.Scanf("%d\n", &N)
 		if err == io.EOF {
 			return
 		}
 		nGuests := 2
-		var line string
 		for i := 0; i < N; i++ {
 			fmt.Fscanf(os.Stdin, "%s\n", &line)
-			if strings.Contains(line, "+one") {
+			j := len(line)
+			// strings.Contains(line, "+one")
+			if j > 4 && int(line[j-4])== int('+') && int(line[j-3]) == int('o') && int(line[j-2])==int('n')&&int(line[j-1])==int('e') {
 				nGuests += 2
 			} else {
 				nGuests++
